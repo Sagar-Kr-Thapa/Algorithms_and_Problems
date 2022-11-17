@@ -1,0 +1,38 @@
+The property where a problem has a recursive definition is called the Optimal Substructure Property. 
+	Example : Fibonacci Series
+
+Overlappig Subproblem Property
+
+Two methods of storing the results in memory:
+	1. Memoization (Top-Down)
+	2. Tabulation (Bottom-Up) 
+	
+Dynamic Programming:
+	-Algorithmic Paradigm that solves a given complex problem by breaking it into subproblems and storing the results of subproblems to avoid computing the same results again. 
+	
+	-DP is mainly used when the Overlapping Subproblem Property is satisfied.
+	
+	-So, we must use DP when
+		: Overlapping Subproblem Property
+		: Optimal Substructure Property
+		
+
+
+Memoization:
+
+0. Initially, initialize the lookup table to NIL value.
+1. Check in lookup table for the number 
+2. If NIL, check for Base Condition
+	2.1. If Base Condition then, update the lookup table & return.
+3. If NOT Base Condition then:
+	-The problem is divided to subproblems and called recursively 
+	-The solutions are then added for f(n)
+	-The solution is updated to the lookup table and returned.
+
+
+
+Bottom-Up Approach:
+
+0. Initialize the base values (base subproblems)
+1. Use a loop to fill the remaining entries by using the base values.
+2. Return table[n] for f(n). 
