@@ -41,12 +41,51 @@ int main()
     ios::sync_with_stdio(0);
     cin.tie(0);
 
-    ll t;
+    string p,t;
+    
     cin >> t;
+    cin >> p;
 
-    while( t-- )
+    ll n=t.size();
+    vec(del,n,0);
+
+    rep(i,0,n)cin>>del[i];
+
+    auto isGood=[&]( ll x )
     {
-        
+        string t_temp(t);
+
+        rep( i,0,x )
+        {
+            t_temp[del[i]-1]='$';
+        }
+
+        ll count=0;
+        repa(ch,p)
+        { 
+            while( count<n && t_temp[count]!=ch)
+            {
+                count++;
+            }
+            if( count>=n )return false;
+            count++;
+        }
+
+        return true;
+    };
+
+    ll l=-1; //lower bound
+    ll r=n; //upper bound
+
+    while( r>l+1 )
+    {
+        ll m=(l+r)/2;
+        if( isGood(m) )l=m;
+        else r=m;
+
+        // cout << l << r << '\n';
     }
+
+    cout << l << '\n';
     return 0;
 }

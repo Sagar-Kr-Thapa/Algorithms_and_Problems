@@ -21,7 +21,7 @@ Dynamic Programming:
 Memoization:
 
 0. Initially, initialize the lookup table to NIL value.
-1. Check in lookup table for the number 
+1. Check in lookup table for the number  
 2. If NIL, check for Base Condition
 	2.1. If Base Condition then, update the lookup table & return.
 3. If NOT Base Condition then:
