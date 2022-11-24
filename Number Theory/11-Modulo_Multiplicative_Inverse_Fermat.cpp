@@ -1,4 +1,10 @@
 // By Sagar Kr Thapa : ST101
+/*
+ * 
+    Finding the modulo multiplicative inverse of a number using Fermat's Little Theorem
+ * 
+*/
+
 
 #include<bits/stdc++.h>
 
@@ -25,6 +31,28 @@
 
 using namespace std;
 
+ll modInv( ll a, ll n, ll d )
+{
+
+    // using binary exponentiation
+    ll base=a;
+    ll result=1;
+    while( n>0 )
+    {
+        if( n%2 )
+        {
+            n--;
+            result = ((result%d) * (base%d))%d;
+        }
+        else 
+        {
+            n/=2;
+            base = ((base%d) * (base%d))%d;
+        }
+    }
+    return result;
+}
+
 
 int main()
 {
@@ -36,25 +64,11 @@ int main()
 
     while( t-- )
     {
-        ll n;
-        cin >> n;
+        ll a,m; //here m should a prime number and  a & m should be coprime, i.e. gcd(m,a)=1;
+        cin>>a>>m;
 
-        //PRIME FACTORIZATION
-        for( ll i=2; i*i<=n; ++i )
-        {
-            if( n%i==0 )
-            {
-                ll count=0;
-                while( n%i==0 )
-                {
-                    count++; n/=i;
-                    // cout << i << ' ' << n << endl;
-                }
-                cout << i << "^" << count << ' ';
-            }
-        }
-        if( n>1 )cout<< n << "^" << 1;
-        cout << endl;
+        //The modulo multipicative inverse of a is 
+        cout << modInv(a,m-2,m) << endl;
     }
     return 0;
 }

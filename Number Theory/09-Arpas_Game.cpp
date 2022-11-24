@@ -1,4 +1,10 @@
 // By Sagar Kr Thapa : ST101
+/*
+ * 
+ *  Calculate the last digit of 1378^n. 
+ * 
+*/
+
 
 #include<bits/stdc++.h>
 
@@ -25,6 +31,26 @@
 
 using namespace std;
 
+void solve( ll n )
+{
+    //using binary exponentiation
+    ll base=8,result=1;
+    while( n>0 )
+    {
+        if( n%2 )
+        {
+            n--;
+            result = (result*base)%10;
+        }
+        else 
+        {
+            n/=2;
+            base = (base*base)%10;
+        }
+    }
+
+    cout << result << endl;
+}
 
 int main()
 {
@@ -34,27 +60,7 @@ int main()
     ll t;
     cin >> t;
 
-    while( t-- )
-    {
-        ll n;
-        cin >> n;
-
-        //PRIME FACTORIZATION
-        for( ll i=2; i*i<=n; ++i )
-        {
-            if( n%i==0 )
-            {
-                ll count=0;
-                while( n%i==0 )
-                {
-                    count++; n/=i;
-                    // cout << i << ' ' << n << endl;
-                }
-                cout << i << "^" << count << ' ';
-            }
-        }
-        if( n>1 )cout<< n << "^" << 1;
-        cout << endl;
-    }
+    solve(t);
+    
     return 0;
 }

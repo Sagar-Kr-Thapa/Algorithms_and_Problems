@@ -1,4 +1,10 @@
 // By Sagar Kr Thapa : ST101
+/*
+ *
+    You are given an array A of integers of size N. You will be given Q queries where each query is represented by two integers L, R. You have to find the gcd(Greatest Common Divisor) of the array after excluding the part from range L to R inclusive (1 Based indexing). You are guaranteed that after excluding the part of the array remaining array is non empty.
+ * 
+*/
+
 
 #include<bits/stdc++.h>
 
@@ -25,6 +31,17 @@
 
 using namespace std;
 
+ll gcd( ll a, ll b )
+{
+    while( b>0 )
+    {
+        ll t=a;
+        a=b;
+        b=t%b;
+    }
+
+    return a;
+}
 
 int main()
 {
@@ -36,25 +53,26 @@ int main()
 
     while( t-- )
     {
-        ll n;
-        cin >> n;
+        ll n,q;
+        cin>>n>>q;
 
-        //PRIME FACTORIZATION
-        for( ll i=2; i*i<=n; ++i )
+        vec(a,n,0);rep(i,0,n)cin>>a[i];
+
+        vec(pre,n+2,0);
+        vec(suf,n+2,0);
+
+        rep(i,0,n)pre[i+1]=gcd(pre[i],a[i]);
+        repn(i,n-1,-1)suf[i]=gcd(suf[i+1],a[i]);
+
+        while( q-- )
         {
-            if( n%i==0 )
-            {
-                ll count=0;
-                while( n%i==0 )
-                {
-                    count++; n/=i;
-                    // cout << i << ' ' << n << endl;
-                }
-                cout << i << "^" << count << ' ';
-            }
+            ll l,r;
+            cin>>l>>r;
+
+            // dprint(pre,n+2);
+
+            cout << gcd(pre[l-1],suf[r]) << endl;
         }
-        if( n>1 )cout<< n << "^" << 1;
-        cout << endl;
     }
     return 0;
 }

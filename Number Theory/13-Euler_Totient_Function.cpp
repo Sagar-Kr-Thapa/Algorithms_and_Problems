@@ -1,4 +1,10 @@
 // By Sagar Kr Thapa : ST101
+/*
+ * 
+    ETF in O(sqrt(N)) time complexity
+ * 
+*/
+
 
 #include<bits/stdc++.h>
 
@@ -25,6 +31,40 @@
 
 using namespace std;
 
+ll phi( ll n )
+{
+    if( n==2 )return 1;
+    else if( n==3 )return 2;
+
+    ll result=n;
+
+    for(ll i=2; i*i<=n; ++i )
+    {
+        if( n%i==0 )
+        {
+            result*=(i-1);
+            result/=i;
+            while( n%i==0 )n/=i;
+        }
+    }
+
+    if( n>1 )
+    {
+        result*=(n-1);
+        result/=n;
+    }
+
+    return result;
+}
+
+void solve()
+{
+    ll n;
+    cin>>n;
+
+    cout << phi(n) << endl;
+}
+
 
 int main()
 {
@@ -36,25 +76,7 @@ int main()
 
     while( t-- )
     {
-        ll n;
-        cin >> n;
-
-        //PRIME FACTORIZATION
-        for( ll i=2; i*i<=n; ++i )
-        {
-            if( n%i==0 )
-            {
-                ll count=0;
-                while( n%i==0 )
-                {
-                    count++; n/=i;
-                    // cout << i << ' ' << n << endl;
-                }
-                cout << i << "^" << count << ' ';
-            }
-        }
-        if( n>1 )cout<< n << "^" << 1;
-        cout << endl;
+        solve(); 
     }
     return 0;
 }
